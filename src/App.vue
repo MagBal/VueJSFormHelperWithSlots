@@ -1,34 +1,33 @@
 <template>
   <div>
-    <form-helper>
-      <div slot="form-header">
-        <h3>Form Title</h3>
-        <p>Information about the form</p>
-      </div>
-      <div slot="form-fields">
-        <input type="text" placeholder="name" required/>
-        <input type="text" placeholder="password" required/>
-      </div>
-      <div slot="form-controls">
-        <button v-on:click="handleSubmit">Submit</button>
-      </div>
-    </form-helper>
+    <keep-alive>
+      <component v-bind:is="component"></component>
+    </keep-alive>
+    <button v-on:click="component='form-one'">Show Form One</button>
+    <button v-on:click="component='form-two'">Show Form Two</button>
   </div>
 </template>
 
 <script>
 import formHelper from "./components/formHelper.vue";
+import formOne from "./components/formOne.vue";
+import formTwo from "./components/formTwo.vue";
 
 export default {
   components: {
-    "form-helper": formHelper
+    "form-one": formOne,
+    "form-two": formTwo
   },
   data() {
     return {
-      title: 'I am a dynamic title'
+      component: "form-one"
     };
   },
-  methods: {}
+  methods: {
+    handleSubmit: function() {
+      alert("thanks for submitting");
+    }
+  }
 };
 </script>
 
